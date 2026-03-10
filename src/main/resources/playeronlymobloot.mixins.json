@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "io.github.andriyko69.playeronlymobloot.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "LivingEntityLootMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}
