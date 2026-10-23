@@ -31,10 +31,7 @@ public abstract class LivingEntityLootMixin {
             return;
         }
 
-        Entity attacker = damageSource.getEntity();
-        Entity directAttacker = damageSource.getDirectEntity();
-
-        if (attacker instanceof Player || directAttacker instanceof Player) {
+        if (playerOnlyMobLoot$isPlayerSource(damageSource)) {
             this.playerOnlyMobLoot$isPlayerInvolved = true;
         }
     }
@@ -51,7 +48,7 @@ public abstract class LivingEntityLootMixin {
             return;
         }
 
-        if (this.playerOnlyMobLoot$isPlayerInvolved) {
+        if (this.playerOnlyMobLoot$isPlayerInvolved || playerOnlyMobLoot$isPlayerSource(damageSource)) {
             return;
         }
 
@@ -63,6 +60,11 @@ public abstract class LivingEntityLootMixin {
         }
 
         ci.cancel();
+    }
+
+    @Unique
+    private static boolean playerOnlyMobLoot$isPlayerSource(DamageSource damageSource) {
+        return damageSource.getEntity() instanceof Player || damageSource.getDirectEntity() instanceof Player;
     }
 
     @Unique
